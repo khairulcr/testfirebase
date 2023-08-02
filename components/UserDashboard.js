@@ -14,9 +14,8 @@ export default function UserDashboard() {
 
     const { todos, setTodos, loading, error } = useFetchTodos()
 
-
-
     console.log(todos)
+
 
     async function handleAddTodo() {
         if (!todo) { 
@@ -32,7 +31,7 @@ export default function UserDashboard() {
             }
         }, { merge: true })
         setTodo('')
-        
+        toast.success('Todo added successfully!')
     }
 
     async function handleEditTodo() {
@@ -47,6 +46,7 @@ export default function UserDashboard() {
         }, { merge: true })
         setEdit(null)
         setEdittedValue('')
+        toast.success('Todo edited successfully!')
     }
 
     function handleAddEdit(todoKey) {
@@ -70,7 +70,9 @@ export default function UserDashboard() {
                     [todoKey]: deleteField()
                 }
             }, { merge: true })
-
+            toast('Good Job!', {
+                icon: '👏',
+              })
         }
     }
 

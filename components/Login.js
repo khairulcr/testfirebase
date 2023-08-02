@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { toast } from 'react-hot-toast'
 
 export default function Login() {
     const [email, setEmail] = useState('')
@@ -13,13 +14,16 @@ export default function Login() {
     async function submitHandler() {
         if (!email || !password) {
             setError('Please enter email and password')
+            toast.error('Please enter email and password!')
             return
         }
         if (isLoggingIn) {
             try {
                 await login(email, password)
+                toast.success('Login successful!')
             } catch (err) {
                 setError('Incorrect email or password')
+                toast.error('Login failed!')
             }
             return
         }

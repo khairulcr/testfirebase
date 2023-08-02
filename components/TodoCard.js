@@ -1,9 +1,14 @@
 import React from 'react'
 
 export default function TodoCard(props) {
-    const { children, edit, handleAddEdit, edittedValue, setEdittedValue, todoKey, handleEditTodo, handleDelete } = props
-
-
+    const { children, 
+            edit, 
+            handleAddEdit, 
+            edittedValue, 
+            setEdittedValue, 
+            todoKey, 
+            handleEditTodo, 
+            handleDelete } = props
 
 
     return (

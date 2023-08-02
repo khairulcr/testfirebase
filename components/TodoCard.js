@@ -25,5 +25,6 @@ export default function TodoCard(props) {
                 <i onClick={handleDelete(todoKey)} className="fa-solid fa-trash-can px-2 duration-300 hover:scale-125 cursor-pointer"></i>
             </div>
         </div>
+
     )
 }

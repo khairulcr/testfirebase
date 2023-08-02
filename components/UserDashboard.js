@@ -4,6 +4,7 @@ import TodoCard from './TodoCard'
 import { doc, setDoc, deleteField } from 'firebase/firestore'
 import { db } from '../firebase'
 import useFetchTodos from '../hooks/fetchTodos'
+import { toast } from 'react-hot-toast'
 
 export default function UserDashboard() {
     const { userInfo, currentUser } = useAuth()
@@ -17,23 +18,21 @@ export default function UserDashboard() {
 
     console.log(todos)
 
-    // useEffect(() => {
-    //     if (!userInfo || Object.keys(userInfo).length === 0) {
-    //         setAddTodo(true)
-    //     }
-    // }, [userInfo])
-
     async function handleAddTodo() {
-        if (!todo) { return }
+        if (!todo) { 
+            return 
+        }
         const newKey = Object.keys(todos).length === 0 ? 1 : Math.max(...Object.keys(todos)) + 1
         setTodos({ ...todos, [newKey]: todo })
         const userRef = doc(db, 'users', currentUser.uid)
-        await setDoc(userRef, {
+        await setDoc(
+            userRef, {
             'todos': {
                 [newKey]: todo
             }
         }, { merge: true })
         setTodo('')
+        
     }
 
     async function handleEditTodo() {
@@ -95,7 +94,6 @@ export default function UserDashboard() {
                     })}
                 </>
             )}
-            {/* {!addTodo && <button onClick={() => setAddTodo(true)} className='text-cyan-300 border border-solid border-cyan-300 py-2 text-center uppercase text-lg duration-300 hover:opacity-30'>ADD TODO</button>} */}
         </div>
     )
 }
